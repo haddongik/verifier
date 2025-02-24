@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Tabs, TextInput, Button, Container, Paper, Title, Group, Flex } from "@mantine/core";
 import { IconCircleFilled } from "@tabler/icons-react";
 import JsonDiffViewer from "@/components/JsonDiffViewer";
+import AccordionComparison from "@/components/AccordionCard";
 
 export default function SearchPage() {
   const [id, setId] = useState("");
@@ -66,45 +67,61 @@ export default function SearchPage() {
       >
         <Tabs.List grow style={{ flexWrap: "wrap" }}> {/* ✅ 작은 화면에서 줄바꿈 가능 */}
           <Tabs.Tab value="tab1" leftSection={<IconCircleFilled size={10} />} style={{ fontSize: "16px", fontWeight: "bold" }}>
-            SEED
+            BATTLE FLOW
           </Tabs.Tab>
           <Tabs.Tab value="tab2" leftSection={<IconCircleFilled size={10} />} style={{ fontSize: "16px", fontWeight: "bold" }}>
-            HP
+            SEED
           </Tabs.Tab>
           <Tabs.Tab value="tab3" leftSection={<IconCircleFilled size={10} />} style={{ fontSize: "16px", fontWeight: "bold" }}>
+            HP
+          </Tabs.Tab>
+          <Tabs.Tab value="tab4" leftSection={<IconCircleFilled size={10} />} style={{ fontSize: "16px", fontWeight: "bold" }}>
             CS
           </Tabs.Tab>
         </Tabs.List>
 
         <Tabs.Panel value="tab1">
           <Paper shadow="xs" p="md" mt="lg" style={{ width: "100%" }}>
-            {data ? (
-                <JsonDiffViewer oldData={data.params.result_info.record_seed_infos} newData={data.params.result_info.verify_seed_infos} /> 
-              ) : (
-                <p>JSON 데이터를 불러오는 중...</p> 
-              )}
+            <AccordionComparison /> 
           </Paper>
         </Tabs.Panel>
 
         <Tabs.Panel value="tab2">
           <Paper shadow="xs" p="md" mt="lg" style={{ width: "100%" }}>
-            {data ? (
-                <JsonDiffViewer oldData={data.params.result_info.record_hp_infos} newData={data.params.result_info.verify_hp_infos} /> 
-              ) : (
-                <p>JSON 데이터를 불러오는 중...</p> 
+            {data?.params?.result_info?.record_seed_infos &&
+              data?.params?.result_info?.verify_seed_infos && (
+                <JsonDiffViewer
+                  oldData={data.params.result_info.record_seed_infos}
+                  newData={data.params.result_info.verify_seed_infos}
+                />
               )}
           </Paper>
         </Tabs.Panel>
 
         <Tabs.Panel value="tab3">
           <Paper shadow="xs" p="md" mt="lg" style={{ width: "100%" }}>
-            {data ? (
-                <JsonDiffViewer oldData={data.params.result_info.record_cs_infos} newData={data.params.result_info.verify_cs_infos} /> 
-              ) : (
-                <p>JSON 데이터를 불러오는 중...</p> 
+            {data?.params?.result_info?.record_hp_infos &&
+              data?.params?.result_info?.verify_hp_infos && (
+                <JsonDiffViewer
+                  oldData={data.params.result_info.record_hp_infos}
+                  newData={data.params.result_info.verify_hp_infos}
+                />
               )}
           </Paper>
         </Tabs.Panel>
+
+        <Tabs.Panel value="tab4">
+          <Paper shadow="xs" p="md" mt="lg" style={{ width: "100%" }}>
+            {data?.params?.result_info?.record_cs_infos &&
+              data?.params?.result_info?.verify_cs_infos && (
+                <JsonDiffViewer
+                  oldData={data.params.result_info.record_cs_infos}
+                  newData={data.params.result_info.verify_cs_infos}
+                />
+              )}
+          </Paper>
+        </Tabs.Panel>
+
       </Tabs>
     </Container>
   );
