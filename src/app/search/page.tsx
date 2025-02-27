@@ -59,7 +59,7 @@ export default function SearchPage() {
       {/* 🔹 반응형 Tabs */}
       <Tabs
         value={activeTab}
-        onChange={setActiveTab}
+        onChange={(value) => value && setActiveTab(value)}
         variant="pills"
         color="blue"
         radius="md"
@@ -88,11 +88,11 @@ export default function SearchPage() {
 
         <Tabs.Panel value="tab2">
           <Paper shadow="xs" p="md" mt="lg" style={{ width: "100%" }}>
-            {data?.params?.result_info?.record_seed_infos &&
-              data?.params?.result_info?.verify_seed_infos && (
+            {data?.params?.result_info?.record_seed_infos !== undefined &&
+              data?.params?.result_info?.verify_seed_infos !== undefined && (
                 <JsonDiffViewer
-                  oldData={data.params.result_info.record_seed_infos}
-                  newData={data.params.result_info.verify_seed_infos}
+                  oldData={data.params.result_info.record_seed_infos || {}}
+                  newData={data.params.result_info.verify_seed_infos || {}}
                 />
               )}
           </Paper>
@@ -100,11 +100,11 @@ export default function SearchPage() {
 
         <Tabs.Panel value="tab3">
           <Paper shadow="xs" p="md" mt="lg" style={{ width: "100%" }}>
-            {data?.params?.result_info?.record_hp_infos &&
-              data?.params?.result_info?.verify_hp_infos && (
+            {data?.params?.result_info?.record_hp_infos !== undefined &&
+              data?.params?.result_info?.verify_hp_infos !== undefined && (
                 <JsonDiffViewer
-                  oldData={data.params.result_info.record_hp_infos}
-                  newData={data.params.result_info.verify_hp_infos}
+                  oldData={data.params.result_info.record_hp_infos || {}}
+                  newData={data.params.result_info.verify_hp_infos || {}}
                 />
               )}
           </Paper>
@@ -112,11 +112,11 @@ export default function SearchPage() {
 
         <Tabs.Panel value="tab4">
           <Paper shadow="xs" p="md" mt="lg" style={{ width: "100%" }}>
-            {data?.params?.result_info?.record_cs_infos &&
-              data?.params?.result_info?.verify_cs_infos && (
+            {data?.params?.result_info?.record_cs_infos !== undefined &&
+              data?.params?.result_info?.verify_cs_infos !== undefined && (
                 <JsonDiffViewer
-                  oldData={data.params.result_info.record_cs_infos}
-                  newData={data.params.result_info.verify_cs_infos}
+                  oldData={data.params.result_info.record_cs_infos || {}}
+                  newData={data.params.result_info.verify_cs_infos || {}}
                 />
               )}
           </Paper>
