@@ -3,16 +3,34 @@
 import { Accordion, Card, Text, Grid, Container } from "@mantine/core";
 
 // 왼쪽 데이터 (기존)
-const data1 = [
+const data1: AccordionItem[] = [
   {
     id: 1,
-    title: "Item 1",
-    description: "Main item description",
+    title: "턴 1",
+    description: "TuwnOwner : 라스",
     ally: "friend", // ✅ 초록색 배경
     subItems: [
       {
         id: "1-1",
-        title: "SubItem 1",
+        title: "라스 3스킬 발동",
+        details: [
+          { label: "Name", value: "John Doe" },
+          { label: "Age", value: "30" },
+          { label: "City", value: "New York" },
+        ],
+      },
+      {
+        id: "1-2",
+        title: "화염 드라고나 반격",
+        details: [
+          { label: "Name", value: "John Doe" },
+          { label: "Age", value: "30" },
+          { label: "City", value: "New York" },
+        ],
+      },
+      {
+        id: "1-3",
+        title: "해로나 추가 스킬 발동",
         details: [
           { label: "Name", value: "John Doe" },
           { label: "Age", value: "30" },
@@ -41,7 +59,7 @@ const data1 = [
 ];
 
 // 오른쪽 데이터 (비교할 대상)
-const data2 = [
+const data2: AccordionItem[] = [
   {
     id: 1,
     title: "Item 1 (Updated)",
@@ -78,6 +96,21 @@ const data2 = [
   },
 ];
 
+interface AccordionItem {
+  id: number | string;
+  title: string;
+  description: string;
+  ally: 'friend' | 'enemy';
+  subItems: {
+    id: string;
+    title: string;
+    details: {
+      label: string;
+      value: string;
+    }[];
+  }[];
+}
+
 export default function AccordionComparison() {
   return (
     <Container size="xl" py="xl">
@@ -99,7 +132,7 @@ export default function AccordionComparison() {
 }
 
 // ✅ 아코디언 UI (중복 코드 최소화)
-function AccordionView({ data }) {
+function AccordionView({ data }: { data: AccordionItem[] }) {
   return (
     <Accordion>
       {data.map((item) => (
