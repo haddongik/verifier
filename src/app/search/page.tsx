@@ -5,9 +5,25 @@ import { IconCircleFilled } from "@tabler/icons-react";
 import JsonDiffViewer from "@/components/JsonDiffViewer";
 import AccordionComparison from "@/components/AccordionCard";
 
+// 먼저 인터페이스 정의
+interface ResultInfo {
+  record_seed_infos: Record<string, unknown>;
+  verify_seed_infos: Record<string, unknown>;
+  record_hp_infos: Record<string, unknown>;
+  verify_hp_infos: Record<string, unknown>;
+  record_cs_infos: Record<string, unknown>;
+  verify_cs_infos: Record<string, unknown>;
+}
+
+interface ApiResponse {
+  params: {
+    result_info: ResultInfo;
+  };
+}
+
 export default function SearchPage() {
   const [id, setId] = useState("");
-  const [data, setData] = useState<{ old: any; new: any } | null>(null);
+  const [data, setData] = useState<ApiResponse | null>(null);
   const [activeTab, setActiveTab] = useState("tab1");
 
   const fetchData = async () => {
@@ -91,8 +107,8 @@ export default function SearchPage() {
             {data?.params?.result_info?.record_seed_infos !== undefined &&
               data?.params?.result_info?.verify_seed_infos !== undefined && (
                 <JsonDiffViewer
-                  oldData={data.params.result_info.record_seed_infos || {}}
-                  newData={data.params.result_info.verify_seed_infos || {}}
+                  oldData={data.params.result_info.record_seed_infos}
+                  newData={data.params.result_info.verify_seed_infos}
                 />
               )}
           </Paper>
