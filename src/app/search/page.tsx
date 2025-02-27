@@ -39,7 +39,7 @@ export default function SearchPage() {
     <Container fluid style={{ paddingTop: "60px", maxWidth: "90vw" }}> {/* ✅ 반응형 너비 적용 */}
       
       {/* 🔹 검색 필드 */}
-      <Group position="apart" align="center" style={{ width: "100%", marginBottom: "20px", flexWrap: "wrap" }}>
+      <Group justify="apart" align="center" style={{ width: "100%", marginBottom: "20px", flexWrap: "wrap" }}>
         <Title order={2} style={{ flex: 1 }}>Search</Title>
 
         <Flex gap="sm" align="center" wrap="wrap"> {/* ✅ 반응형 적용 */}
